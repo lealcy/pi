@@ -1,0 +1,31 @@
+PI <input type="text" value="0" id="pi"></input><br>
+Fraction <input type="text" value="0" id="fraction"></input><br>
+Running <input type="text" value="0" id="running"></input><br>
+<input type="button" value="Calculate" onClick="start()"></input>
+<input type="button" value="Stop" onClick="stop = true;"></input>
+<script>
+    var pi = document.getElementById("pi");
+    var fraction = document.getElementById("fraction");
+    var running = document.getElementById("running");
+    var plus = false;
+    var value = 1;
+    var divisor = 3;
+    setInterval(function(){
+        pi.value = value * 4;
+        fraction.value = (plus ? "" : "-") + "1/" + divisor;
+        running.value = !stop;
+    }, 100);
+    function iterate() {
+        if (!stop) {
+            if (plus) value += 1 / divisor;
+            else value -= 1 / divisor;
+            plus = !plus;
+            divisor += 2;
+            setTimeout(iterate, 1);
+        }
+    }
+    function start() {
+        stop = false;
+        iterate();
+    }
+</script>
